@@ -6,6 +6,25 @@ namespace GrimWaves.UI
 	{
 		#region PROPERTIES
 		public static UIManager instance { get; private set; }
+
+		public static MainMenuUIManager mainMenuManager
+		{
+			get { return instance.m_MainMenuManager; }
+		}
+
+		public static InGameUIManager inGameManager
+		{
+			get { return instance.m_InGameManager; }
+		}
+		#endregion
+
+
+		#region PRIVATE VARIABLES
+		[SerializeField]
+		private MainMenuUIManager m_MainMenuManager;
+
+		[SerializeField]
+		private InGameUIManager m_InGameManager;
 		#endregion
 
 

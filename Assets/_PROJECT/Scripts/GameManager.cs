@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using System;
 
@@ -18,6 +19,8 @@ namespace GrimWaves
 
 		#region PROPERTIES
 		public static GameManager instance { get; private set; }
+
+		public static Scene? loadedScene { get; private set; }
 		#endregion
 
 
@@ -48,6 +51,17 @@ namespace GrimWaves
 		#endregion
 
 
+		#region EVENT HANDLERS
+		void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+		{
+			SceneManager.sceneLoaded -= HandleSceneLoaded;
+
+			loadedScene = scene;
+			onLevelStarted();
+		}
+		#endregion
+
+
 		#region PUBLIC API
 		public void PauseGame()
 		{
@@ -61,9 +75,12 @@ namespace GrimWaves
 			onGameResumed();
 		}
 
-		public void StartLevel()
+		public void StartLevel(string sceneName)
 		{
-			onLevelStarted();
+			UnloadLevel();
+
+			SceneManager.sceneLoaded += HandleSceneLoaded;
+			SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 		}
 
 		public void EndLevel(bool reachedEnd = false)
@@ -73,12 +90,21 @@ namespace GrimWaves
 
 		public void QuitLevel()
 		{
+			UnloadLevel();
 			onLevelQuit();
 		}
 		#endregion
 
 
 		#region HELPER FUNCTIONS
+		void UnloadLevel()
+		{
+			if (loadedScene != null)
+			{
+				SceneManager.UnloadSceneAsync(loadedScene.Value.buildIndex);
+				loadedScene = null;
+			}
+		}
 		#endregion
 	}
 }

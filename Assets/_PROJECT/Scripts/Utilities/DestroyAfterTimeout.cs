@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GrimWaves.Utility
+namespace GrimWaves.Utilities
 {
 	/// <summary>
 	/// Destroys the game object after a specified amount of time.
