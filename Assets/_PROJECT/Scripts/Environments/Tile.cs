@@ -4,6 +4,9 @@ using System;
 
 namespace GrimWaves.Environments
 {
+	/// <summary>
+	/// Represents a tiled piece of the environment.
+	/// </summary>
 	public class Tile : MonoBehaviour
 	{
 		#region EVENTS
@@ -19,7 +22,10 @@ namespace GrimWaves.Environments
 		#region UNITY EVENTS
 		void OnTriggerEnter(Collider col)
 		{
-			onTilePassed();
+			if (col.gameObject.layer == Layers.FERRY)
+			{
+				onTilePassed();
+			}
 		}
 		#endregion
 	}

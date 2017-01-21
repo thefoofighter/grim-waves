@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace GrimWaves.Environments
 {
+	/// <summary>
+	/// Spawns <see cref="Tile"/> environment pieces in sequence.
+	/// </summary>
 	public class TileSpawner : MonoBehaviour
 	{
 		#region PROPERTIES

@@ -15,7 +15,24 @@ namespace GrimWaves.Environments
 		#region UNITY EVENTS
 		void OnTriggerStay(Collider other)
 		{
-			other.attachedRigidbody.AddForce(transform.forward * m_Strength, ForceMode.Acceleration);
+			// Don't affect other 
+			if ((1 << other.gameObject.layer & Layers.WATER_AFFECTED_MASK) != 0)
+			{
+				// Apply a force in the forward direction of this game object.
+				other.attachedRigidbody.AddForce(transform.forward * m_Strength, ForceMode.Acceleration);
+
+				// Rotate the objects forward axis toward the forward axis of this current.
+
+				var angle = Vector3.Angle(transform.forward, other.attachedRigidbody.transform.forward);
+				var cross = Vector3.Cross(transform.forward, other.attachedRigidbody.transform.forward);
+
+				if (!(cross.y < 0))
+				{
+					angle = -angle;
+				}
+
+				other.attachedRigidbody.transform.Rotate(transform.up, angle * Time.deltaTime);
+			}
 		}
 		#endregion
 	}
