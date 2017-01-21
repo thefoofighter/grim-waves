@@ -33,8 +33,6 @@ namespace GrimWaves.Controls
 		{
 			var dir = position - worldSpacePosition;
 			m_Body.AddForce(dir.normalized * m_ForceScaler, ForceMode.Impulse);
-
-			Debug.LogFormat("The ferry-man uses his mana to maneuver his vessel out of danger. He moves in the direction {0}", worldSpacePosition);
 		}
 
 		public void SacrificeSoul()
