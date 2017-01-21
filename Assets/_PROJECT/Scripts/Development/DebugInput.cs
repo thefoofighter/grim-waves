@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 using GrimWaves.Controls;
+using GrimWaves.Player;
 
 namespace GrimWaves.Development
 {
@@ -13,20 +14,23 @@ namespace GrimWaves.Development
 		public bool m_EnableDebug;
 		public GameObject m_RippleIndicatorPrefab;
 		public GameObject m_SoulSacrificeIndicatorPrefab;
+		public GameObject m_CollisionIndicatorPrefab;
 		#endregion
 
 
 		#region UNITY EVENTS
 		void Awake()
 		{
-			InputHandler.onRipple += SpawnRippleIndicator;
-			InputHandler.onSoulSacrifice += SpawnSoulSacrificeIndicator;
+			InputHandler.onPrimaryInput += SpawnRippleIndicator;
+			InputHandler.onSecondaryInput += SpawnSoulSacrificeIndicator;
+			Ferry.onObstacleCollision += SpawnCollisionIndicator;
 		}
 
 		void Destroy()
 		{
-			InputHandler.onRipple -= SpawnRippleIndicator;
-			InputHandler.onSoulSacrifice -= SpawnSoulSacrificeIndicator;
+			InputHandler.onPrimaryInput -= SpawnRippleIndicator;
+			InputHandler.onSecondaryInput -= SpawnSoulSacrificeIndicator;
+			Ferry.onObstacleCollision -= SpawnCollisionIndicator;
 		}
 		#endregion
 
@@ -45,6 +49,14 @@ namespace GrimWaves.Development
 			if (m_EnableDebug)
 			{
 				Instantiate(m_SoulSacrificeIndicatorPrefab, position, m_SoulSacrificeIndicatorPrefab.transform.rotation, transform);
+			}
+		}
+
+		void SpawnCollisionIndicator(Vector3 position)
+		{
+			if (m_EnableDebug)
+			{
+				Instantiate(m_CollisionIndicatorPrefab, position, m_CollisionIndicatorPrefab.transform.rotation, transform);
 			}
 		}
 		#endregion

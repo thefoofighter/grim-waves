@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
 
+using GrimWaves.Player;
+
 namespace GrimWaves.Controls
 {
 	/// <summary>
@@ -9,8 +11,8 @@ namespace GrimWaves.Controls
 	public class InputHandler : MonoBehaviour
 	{
 		#region EVENTS
-		public static Action<Vector3> onRipple = delegate { };
-		public static Action<Vector3> onSoulSacrifice = delegate { };
+		public static Action<Vector3> onPrimaryInput = delegate { };
+		public static Action<Vector3> onSecondaryInput = delegate { };
 		#endregion
 
 
@@ -34,18 +36,23 @@ namespace GrimWaves.Controls
 		#region INPUT HANDLERS
 		void HandlePrimaryInput(Vector3 inputPosition)
 		{
-			onRipple(inputPosition);
+			onPrimaryInput(inputPosition);
 
-			Ferry.instance.HandleRipple(inputPosition);
+			if (Ferry.instance.HandleRipple(inputPosition))
+			{
+				// TODO Spawn ripple effects, particles, etc.
+			}
 
-			// TODO Spawn ripple effects, particles, etc.
 		}
 
 		void HandleSecondaryInput(Vector3 inputPosition)
 		{
-			onSoulSacrifice(inputPosition);
+			onSecondaryInput(inputPosition);
 
-			// TODO Spawn effects etc.
+			if (Ferry.instance.SacrificeSoul(inputPosition))
+			{
+				// TODO Spawn effects etc.
+			}
 		}
 		#endregion
 	}
