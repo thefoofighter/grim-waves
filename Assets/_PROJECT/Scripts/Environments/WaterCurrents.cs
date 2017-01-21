@@ -8,7 +8,7 @@ namespace GrimWaves.Environments
 	public class WaterCurrents : MonoBehaviour
 	{
 		#region VARIABLES
-		public float m_Strength = 10f;
+		public float m_Strength = 12f;
 		#endregion
 
 
