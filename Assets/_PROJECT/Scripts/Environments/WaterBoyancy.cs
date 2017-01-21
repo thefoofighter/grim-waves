@@ -15,8 +15,11 @@ namespace GrimWaves.Environments
 		#region UNITY EVENTS
 		void OnTriggerStay(Collider other)
 		{
-			// Apply a force in the forward direction of this game object.
-			other.attachedRigidbody.AddForce(transform.up * m_Strength, ForceMode.Acceleration);
+			if ((1 << other.gameObject.layer & Layers.WATER_AFFECTED_MASK) != 0)
+			{
+				// Apply a force in the forward direction of this game object.
+				other.attachedRigidbody.AddForce(transform.up * m_Strength, ForceMode.Acceleration);
+			}
 		}
 		#endregion
 	}

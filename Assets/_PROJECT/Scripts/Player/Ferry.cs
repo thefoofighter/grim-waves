@@ -87,8 +87,8 @@ namespace GrimWaves.Player
 
 				var angle = Vector3.Angle(transform.forward, dir);
 
-				StopAllCoroutines();
-				StartCoroutine(WaveRotate(dir));
+				//StopAllCoroutines();
+				//StartCoroutine(WaveRotate(dir));
 
 				// If wave is from behind the boat, rotate the nose toward the
 				if (angle <= 90)
