@@ -38,18 +38,21 @@ namespace GrimWaves.Controls
 		{
 			onPrimaryInput(inputPosition);
 
-			Ferry.instance.HandleRipple(inputPosition);
+			if (Ferry.instance.HandleRipple(inputPosition))
+			{
+				// TODO Spawn ripple effects, particles, etc.
+			}
 
-			// TODO Spawn ripple effects, particles, etc.
 		}
 
 		void HandleSecondaryInput(Vector3 inputPosition)
 		{
 			onSecondaryInput(inputPosition);
 
-			Ferry.instance.SacrificeSoul(inputPosition);
-
-			// TODO Spawn effects etc.
+			if (Ferry.instance.SacrificeSoul(inputPosition))
+			{
+				// TODO Spawn effects etc.
+			}
 		}
 		#endregion
 	}

@@ -15,9 +15,11 @@ namespace GrimWaves.Development
 		#region UNITY EVENTS
 		void Update()
 		{
-			m_Text.text = string.Format("Ferry:\nVelocity = {0}\nDrag = {1}",
+			m_Text.text = string.Format("Ferry:\nVelocity = {0}\nDrag = {1}\n\nMana = {2}\nSouls = {3}",
 										Ferry.instance.m_Body.velocity.magnitude,
-										Ferry.instance.m_Body.drag
+										Ferry.instance.m_Body.drag,
+			                            Ferry.instance.mana,
+			                            Ferry.instance.souls
 			                           );
 		}
 		#endregion
