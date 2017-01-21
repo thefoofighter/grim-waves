@@ -7,7 +7,7 @@ namespace GrimWaves.Environments
 	public class Tile : MonoBehaviour
 	{
 		#region EVENTS
-		public static event Action onTilePassed;
+		public static event Action onTilePassed = delegate {};
 		#endregion
 
 
