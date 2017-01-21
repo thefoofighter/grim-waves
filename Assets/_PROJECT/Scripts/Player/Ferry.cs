@@ -75,6 +75,7 @@ namespace GrimWaves.Player
 
 		#region PUBLIC VARIABLES
 		public Rigidbody m_Body;
+		public FerryAnimationController m_AnimationController;
 
 		public float m_RippleMovementScaler = 5f;
 		public float m_MaximumVelocity = 5f;
@@ -130,12 +131,6 @@ namespace GrimWaves.Player
 
 				StopAllCoroutines();
 				StartCoroutine(RippleTurn(dir));
-
-				// If wave is from behind the boat, rotate the nose toward the
-				if (angle <= 90)
-				{
-					//TODO Apply torque
-				}
 
 				return true;
 			}
@@ -198,6 +193,11 @@ namespace GrimWaves.Player
 				timer -= Time.deltaTime;
 				yield return null;
 			}
+		}
+
+		void RippleAnimate(float angle, bool clockwise)
+		{
+			m_AnimationController
 		}
 		#endregion
 	}
