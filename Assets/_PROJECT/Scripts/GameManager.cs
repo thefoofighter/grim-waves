@@ -65,13 +65,13 @@ namespace GrimWaves
 		#region PUBLIC API
 		public void PauseGame()
 		{
-			Time.timeScale = 1f;
+			Time.timeScale = 0f;
 			onGamePaused();
 		}
 
 		public void ResumeGame()
 		{
-			Time.timeScale = 0f;
+			Time.timeScale = 1f;
 			onGameResumed();
 		}
 
@@ -90,6 +90,7 @@ namespace GrimWaves
 
 		public void QuitLevel()
 		{
+			Time.timeScale = 1f;
 			UnloadLevel();
 			onLevelQuit();
 		}

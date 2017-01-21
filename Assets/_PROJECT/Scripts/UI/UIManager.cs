@@ -7,24 +7,32 @@ namespace GrimWaves.UI
 		#region PROPERTIES
 		public static UIManager instance { get; private set; }
 
-		public static MainMenuUIManager mainMenuManager
+		public static MainMenuUIManager mainMenu
 		{
-			get { return instance.m_MainMenuManager; }
+			get { return instance.m_MainMenu; }
 		}
 
-		public static InGameUIManager inGameManager
+		public static InGameMenuUIManager inGameMenu
 		{
-			get { return instance.m_InGameManager; }
+			get { return instance.m_InGameMenu; }
+		}
+
+		public static InGameOverlayUIManager inGameOverlay
+		{
+			get { return instance.m_InGameOverlay; }
 		}
 		#endregion
 
 
 		#region PRIVATE VARIABLES
 		[SerializeField]
-		private MainMenuUIManager m_MainMenuManager;
+		private MainMenuUIManager m_MainMenu;
 
 		[SerializeField]
-		private InGameUIManager m_InGameManager;
+		private InGameMenuUIManager m_InGameMenu;
+
+		[SerializeField]
+		private InGameOverlayUIManager m_InGameOverlay;
 		#endregion
 
 
@@ -34,6 +42,11 @@ namespace GrimWaves.UI
 			if (instance == null)
 			{
 				instance = this;
+
+				GameManager.onLevelQuit += ShowMainMenu;
+				GameManager.onGamePaused += ShowInGameMenu;
+				GameManager.onGameResumed += ShowInGameOverlay;
+				GameManager.onLevelStarted += ShowInGameOverlay;
 			}
 			else
 			{
@@ -46,7 +59,40 @@ namespace GrimWaves.UI
 			if (instance == this)
 			{
 				instance = null;
+
+				GameManager.onLevelQuit -= ShowMainMenu;
+				GameManager.onGamePaused -= ShowInGameMenu;
+				GameManager.onGameResumed -= ShowInGameOverlay;
+				GameManager.onLevelStarted -= ShowInGameOverlay;
 			}
+		}
+		#endregion
+
+
+		#region PUBLIC API
+		public void ShowMainMenu()
+		{
+			HideUI();
+			mainMenu.gameObject.SetActive(true);
+		}
+
+		public void ShowInGameMenu()
+		{
+			HideUI();
+			inGameMenu.gameObject.SetActive(true);
+		}
+
+		public void ShowInGameOverlay()
+		{
+			HideUI();
+			inGameOverlay.gameObject.SetActive(true);
+		}
+
+		public void HideUI()
+		{
+			mainMenu.gameObject.SetActive(false);
+			inGameMenu.gameObject.SetActive(false);
+			inGameOverlay.gameObject.SetActive(false);
 		}
 		#endregion
 	}
