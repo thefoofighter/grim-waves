@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 
 namespace GrimWaves.Player
 {
@@ -28,6 +29,7 @@ namespace GrimWaves.Player
 
 		#region CONSTANTS
 		public const float VELOCITY_DRAG_RATIO = 37.5f;
+		public const float WAVE_ROTATE_TIME = 0.5f;
 
 		public const int SOUL_MANA_EXCHANGE_RATE = 10;
 		public const int STARTING_SOUL_COUNT = 10;
@@ -85,6 +87,9 @@ namespace GrimWaves.Player
 
 				var angle = Vector3.Angle(transform.forward, dir);
 
+				StopAllCoroutines();
+				StartCoroutine(WaveRotate(dir));
+
 				// If wave is from behind the boat, rotate the nose toward the
 				if (angle <= 90)
 				{
@@ -139,6 +144,24 @@ namespace GrimWaves.Player
 
 
 		#region HELPERS
+		IEnumerator WaveRotate(Vector3 direction)
+		{
+			float timer = WAVE_ROTATE_TIME;
+			while (timer > 0f)
+			{
+				var angle = Vector3.Angle(direction, transform.forward);
+				var cross = Vector3.Cross(direction, transform.forward);
+				if (!(cross.y < 0))
+				{
+					angle = -angle;
+				}
+				transform.Rotate(transform.up, angle * Time.deltaTime);
+
+				timer -= Time.deltaTime;
+				yield return null;
+			}
+		}
+
 		bool CheckSoulsRemaining()
 		{
 			if (souls <= 0)
