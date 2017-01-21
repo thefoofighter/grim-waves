@@ -92,6 +92,7 @@ namespace GrimWaves
 		{
 			Time.timeScale = 1f;
 			UnloadLevel();
+
 			onLevelQuit();
 		}
 		#endregion
@@ -102,7 +103,7 @@ namespace GrimWaves
 		{
 			if (loadedScene != null)
 			{
-				SceneManager.UnloadSceneAsync(loadedScene.Value.buildIndex);
+				SceneManager.UnloadSceneAsync(loadedScene.Value);
 				loadedScene = null;
 			}
 		}

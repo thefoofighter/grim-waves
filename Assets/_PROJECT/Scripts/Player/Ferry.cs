@@ -9,24 +9,6 @@ namespace GrimWaves.Player
 	/// </summary>
 	public class Ferry : MonoBehaviour
 	{
-		#region EVENTS
-		public static Action<Vector3> onObstacleCollision = delegate { };
-
-		public static Action onManaDepleted = delegate { };
-		public static Action onSoulsDepleted = delegate { };
-		#endregion
-
-
-		#region PROPERTIES
-		public static Ferry instance { get; private set; }
-
-		public Vector3 position { get { return m_Body.position; } }
-
-		public int souls { get; private set; }
-		public int mana { get; private set; }
-		#endregion
-
-
 		#region CONSTANTS
 		public const float VELOCITY_DRAG_RATIO = 37.5f;
 		public const float WAVE_ROTATE_TIME = 0.5f;
@@ -37,11 +19,71 @@ namespace GrimWaves.Player
 		#endregion
 
 
-		#region VARIABLES
+		#region EVENTS
+		public static Action<Vector3> onObstacleCollision = delegate {};
+
+		public static Action onManaDepleted = delegate {};
+		public static Action onSoulsDepleted = delegate {};
+
+		public static Action<int> onManaChanged = delegate {};
+		public static Action<int> onSoulsChanged = delegate {};
+		#endregion
+
+
+		#region PROPERTIES
+		public static Ferry instance { get; private set; }
+
+		public Vector3 position { get { return m_Body.position; } }
+
+		public int souls
+		{
+			get { return m_Souls; }
+			private set
+			{
+				if (m_Souls != value)
+				{
+					m_Souls = value;
+					onSoulsChanged(m_Souls);
+					
+					if (m_Souls <= 0)
+					{
+						onSoulsDepleted();
+					}
+				}
+			}
+		}
+
+		public int mana 
+		{ 			
+			get { return m_Mana; }
+			private set
+			{
+				if (m_Mana != value)
+				{
+					m_Mana = value;
+					onManaChanged(m_Mana);
+					
+					if (m_Mana <= 0)
+					{
+						onManaDepleted();
+					}
+				}
+			}
+		}
+		#endregion
+
+
+		#region PUBLIC VARIABLES
 		public Rigidbody m_Body;
 
 		public float m_RippleMovementScaler = 5f;
 		public float m_MaximumVelocity = 5f;
+		#endregion
+
+
+		#region PRIVATE VARIABLES
+		private int m_Souls;
+		private int m_Mana;
 		#endregion
 
 
@@ -79,7 +121,6 @@ namespace GrimWaves.Player
 			if (mana > 0)
 			{
 				--mana;
-				CheckManaRemaining();
 
 				// Push boat in direction of wave.
 				var dir = position - worldSpacePosition;
@@ -112,7 +153,6 @@ namespace GrimWaves.Player
 			{
 				--souls;
 				mana += SOUL_MANA_EXCHANGE_RATE;
-				CheckSoulsRemaining();
 
 				return true;
 			}
@@ -129,8 +169,6 @@ namespace GrimWaves.Player
 		{
 			onObstacleCollision(collisionPosition);
 			--souls;
-
-			CheckSoulsRemaining();
 		}
 
 		/// <summary>
@@ -160,28 +198,6 @@ namespace GrimWaves.Player
 				timer -= Time.deltaTime;
 				yield return null;
 			}
-		}
-
-		bool CheckSoulsRemaining()
-		{
-			if (souls <= 0)
-			{
-				onSoulsDepleted();
-				return false;
-			}
-
-			return true;
-		}
-
-		bool CheckManaRemaining()
-		{
-			if (mana <= 0)
-			{
-				onManaDepleted();
-				return false;
-			}
-
-			return true;
 		}
 		#endregion
 	}
