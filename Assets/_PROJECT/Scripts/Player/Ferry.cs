@@ -87,8 +87,8 @@ namespace GrimWaves.Player
 
 				var angle = Vector3.Angle(transform.forward, dir);
 
-				//StopAllCoroutines();
-				//StartCoroutine(WaveRotate(dir));
+				StopAllCoroutines();
+				StartCoroutine(RippleTurn(dir));
 
 				// If wave is from behind the boat, rotate the nose toward the
 				if (angle <= 90)
@@ -144,7 +144,7 @@ namespace GrimWaves.Player
 
 
 		#region HELPERS
-		IEnumerator WaveRotate(Vector3 direction)
+		IEnumerator RippleTurn(Vector3 direction)
 		{
 			float timer = WAVE_ROTATE_TIME;
 			while (timer > 0f)
@@ -155,7 +155,7 @@ namespace GrimWaves.Player
 				{
 					angle = -angle;
 				}
-				transform.Rotate(transform.up, angle * Time.deltaTime);
+				transform.Rotate(transform.up, angle * (Time.deltaTime * (timer/WAVE_ROTATE_TIME)));
 
 				timer -= Time.deltaTime;
 				yield return null;
