@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 using GrimWaves.Player;
 
 namespace GrimWaves.Environments
@@ -11,6 +10,7 @@ namespace GrimWaves.Environments
 	{
 		#region CONSTANTS
 		public const float COLLISION_TIMEOUT = 1.5f;
+		public const float COLLISION_BOUNCE_SCALER = 30f;
 		#endregion
 
 

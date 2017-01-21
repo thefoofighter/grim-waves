@@ -81,7 +81,7 @@ namespace GrimWaves.Player
 
 				// Push boat in direction of wave.
 				var dir = position - worldSpacePosition;
-				m_Body.AddForce(dir.normalized * m_RippleMovementScaler, ForceMode.Impulse);
+				ApplyForce(dir.normalized * m_RippleMovementScaler);
 
 				var angle = Vector3.Angle(transform.forward, dir);
 
@@ -126,6 +126,14 @@ namespace GrimWaves.Player
 			--souls;
 
 			CheckSoulsRemaining();
+		}
+
+		/// <summary>
+		/// Applies a small nudging (impulse) force to the ferry's rigid body in the direction specified.
+		/// </summary>
+		public void ApplyForce(Vector3 directionalForce)
+		{
+			m_Body.AddForce(directionalForce, ForceMode.Impulse);
 		}
 		#endregion
 
