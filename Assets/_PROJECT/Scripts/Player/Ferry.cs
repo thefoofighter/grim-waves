@@ -127,8 +127,6 @@ namespace GrimWaves.Player
 				var dir = position - worldSpacePosition;
 				ApplyForce(dir.normalized * m_RippleMovementScaler);
 
-				var angle = Vector3.Angle(transform.forward, dir);
-
 				StopAllCoroutines();
 				StartCoroutine(RippleTurn(dir));
 
@@ -180,14 +178,25 @@ namespace GrimWaves.Player
 		IEnumerator RippleTurn(Vector3 direction)
 		{
 			float timer = WAVE_ROTATE_TIME;
+			bool firedAnim = false;
+
 			while (timer > 0f)
 			{
 				var angle = Vector3.Angle(direction, transform.forward);
 				var cross = Vector3.Cross(direction, transform.forward);
-				if (!(cross.y < 0))
+				var clockwise = cross.y < 0;
+
+				if (!clockwise)
 				{
 					angle = -angle;
 				}
+
+				if (!firedAnim)
+				{
+					RippleAnimate(angle);
+					firedAnim = true;
+				}
+
 				transform.Rotate(transform.up, angle * (Time.deltaTime * (timer/WAVE_ROTATE_TIME)));
 
 				timer -= Time.deltaTime;
@@ -195,9 +204,28 @@ namespace GrimWaves.Player
 			}
 		}
 
-		void RippleAnimate(float angle, bool clockwise)
+		void RippleAnimate(float angle)
 		{
-			m_AnimationController
+			FerryAnimationController.AnimationType anim;
+
+			if (Math.Abs(angle) < 45f)
+			{
+				anim = FerryAnimationController.AnimationType.HitBack;
+			}
+			else if (Math.Abs(angle) > 155f)
+			{
+				anim = FerryAnimationController.AnimationType.HitFront;
+			}
+			else if (angle > 0f)
+			{
+				anim = FerryAnimationController.AnimationType.HitLeft;
+			}
+			else
+			{
+				anim = FerryAnimationController.AnimationType.HitRight;
+			}
+
+			m_AnimationController.TriggerAnimation(anim);
 		}
 		#endregion
 	}

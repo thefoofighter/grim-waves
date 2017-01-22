@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GrimWaves.Utilties
+namespace GrimWaves.Utilities
 {
 	public class DontDestroy : MonoBehaviour
 	{
