@@ -58,7 +58,7 @@
 
 		CGPROGRAM
 #pragma surface surf BlinnPhong vertex:vert keepalpha
-#pragma target 5.0
+//#pragma target 5.0
 
 		float4 _Color;
 	sampler2D _NormalMap;
