@@ -1,20 +1,22 @@
 fileFormatVersion: 2
-guid: 9c78c468defa94893b30c8ba1a14c71b
-timeCreated: 1485008833
+guid: f49efd612143f4237bc7b6afc85e40ea
+timeCreated: 1485074751
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: TileB_02
-    400000: //RootNode
-    400002: TileB_02
-    2300000: TileB_02
-    3300000: TileB_02
-    4300000: TileB_02
+    100000: Geo_TileTopper02
+    100002: //RootNode
+    100004: pasted__group3
+    400000: Geo_TileTopper02
+    400002: //RootNode
+    400004: pasted__group3
+    2300000: Geo_TileTopper02
+    3300000: Geo_TileTopper02
+    4300000: Geo_TileTopper02
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
