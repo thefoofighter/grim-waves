@@ -225,8 +225,6 @@ namespace GrimWaves.Player
 				anim = FerryAnimationController.AnimationType.HitRight;
 			}
 
-			Debug.LogErrorFormat("{0} - {1}", angle, anim.ToString());
-
 			m_AnimationController.TriggerAnimation(anim);
 		}
 		#endregion
