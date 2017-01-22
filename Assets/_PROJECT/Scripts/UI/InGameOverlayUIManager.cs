@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using GrimWaves.Environments;
 using GrimWaves.Player;
 
 namespace GrimWaves.UI
@@ -8,6 +9,7 @@ namespace GrimWaves.UI
 	public class InGameOverlayUIManager : MonoBehaviour 
 	{
 		#region PUBLIC VARIABLES
+		public Text m_ScoreDisplay;
 		public Text m_SoulsDisplay;
 		public Slider m_ManaDisplay;
 		#endregion
@@ -16,15 +18,18 @@ namespace GrimWaves.UI
 		#region UNITY EVENTS
 		void OnEnable()
 		{
+			SetScoreDisplay(TileSpawner.instance.totalTilesPassed);
 			SetSoulsDisplay(Ferry.instance.souls);
 			SetManaDisplay(Ferry.instance.mana);
 
+			Tile.onTilePassed += UpdateScore;
 			Ferry.onSoulsChanged += UpdateSouls;
 			Ferry.onManaChanged += UpdateMana;
 		}
 
 		void OnDisable()
 		{
+			Tile.onTilePassed -= UpdateScore;
 			Ferry.onSoulsChanged -= UpdateSouls;
 			Ferry.onManaChanged -= UpdateMana;
 		}
@@ -40,6 +45,11 @@ namespace GrimWaves.UI
 
 
 		#region EVENT HANDLERS
+		void UpdateScore()
+		{
+			SetScoreDisplay(TileSpawner.instance.totalTilesPassed);
+		}
+
 		void UpdateSouls(int newSouls)
 		{
 			SetSoulsDisplay(newSouls);
@@ -61,6 +71,11 @@ namespace GrimWaves.UI
 
 
 		#region HELPER FUNCTIONS
+		void SetScoreDisplay(int newScore)
+		{
+			m_ScoreDisplay.text = string.Format("Distance: {0}", newScore);
+		}
+
 		void SetSoulsDisplay(int newSouls)
 		{
 			m_SoulsDisplay.text = string.Format("Souls: {0}", newSouls);

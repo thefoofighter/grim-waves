@@ -21,6 +21,11 @@ namespace GrimWaves.UI
 		{
 			get { return instance.m_InGameOverlay; }
 		}
+
+		public static GameOverUIManager gameOverMenu
+		{
+			get { return instance.m_GameOverMenu; }
+		}
 		#endregion
 
 
@@ -33,6 +38,9 @@ namespace GrimWaves.UI
 
 		[SerializeField]
 		private InGameOverlayUIManager m_InGameOverlay;
+
+		[SerializeField]
+		private GameOverUIManager m_GameOverMenu;
 		#endregion
 
 
@@ -47,6 +55,7 @@ namespace GrimWaves.UI
 				GameManager.onGamePaused += ShowInGameMenu;
 				GameManager.onGameResumed += ShowInGameOverlay;
 				GameManager.onLevelStarted += ShowInGameOverlay;
+				GameManager.onLevelEnded += ShowGameOver;
 			}
 			else
 			{
@@ -64,6 +73,7 @@ namespace GrimWaves.UI
 				GameManager.onGamePaused -= ShowInGameMenu;
 				GameManager.onGameResumed -= ShowInGameOverlay;
 				GameManager.onLevelStarted -= ShowInGameOverlay;
+				GameManager.onLevelEnded += ShowGameOver;
 			}
 		}
 		#endregion
@@ -86,6 +96,12 @@ namespace GrimWaves.UI
 		{
 			HideUI();
 			inGameOverlay.gameObject.SetActive(true);
+		}
+
+		public void ShowGameOver(bool reachedEnd)
+		{
+			HideUI();
+			gameOverMenu.gameObject.SetActive(true);
 		}
 
 		public void HideUI()
