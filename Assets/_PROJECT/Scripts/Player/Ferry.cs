@@ -16,6 +16,7 @@ namespace GrimWaves.Player
 		public const int SOUL_MANA_EXCHANGE_RATE = 10;
 		public const int STARTING_SOUL_COUNT = 10;
 		public const int STARTING_MANA_COUNT = 10;
+		public const int MAX_MANA_COUNT = 20;
 		#endregion
 
 
@@ -60,10 +61,10 @@ namespace GrimWaves.Player
 			{
 				if (m_Mana != value)
 				{
-					m_Mana = value;
+					m_Mana = Mathf.Clamp(value, 0, MAX_MANA_COUNT);
 					onManaChanged(m_Mana);
 					
-					if (m_Mana <= 0)
+					if (m_Mana == 0)
 					{
 						onManaDepleted();
 					}
