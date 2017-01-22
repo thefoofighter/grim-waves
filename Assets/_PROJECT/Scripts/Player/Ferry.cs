@@ -77,6 +77,7 @@ namespace GrimWaves.Player
 		#region PUBLIC VARIABLES
 		public Rigidbody m_Body;
 		public FerryAnimationController m_AnimationController;
+		public FerryAudioController m_AudioController;
 
 		public float m_RippleMovementScaler = 5f;
 		public float m_MaximumVelocity = 5f;
@@ -131,6 +132,8 @@ namespace GrimWaves.Player
 				StopAllCoroutines();
 				StartCoroutine(RippleTurn(dir));
 
+				m_AudioController.PlayRippleSound();
+
 				return true;
 			}
 
@@ -147,6 +150,7 @@ namespace GrimWaves.Player
 			{
 				--souls;
 				mana += SOUL_MANA_EXCHANGE_RATE;
+				m_AudioController.PlaySoulSacrificeSound();
 
 				return true;
 			}
@@ -163,6 +167,7 @@ namespace GrimWaves.Player
 		{
 			onObstacleCollision(collisionPosition);
 			--souls;
+			m_AudioController.PlayCollisionSound();
 		}
 
 		public void PickUpSoul()
