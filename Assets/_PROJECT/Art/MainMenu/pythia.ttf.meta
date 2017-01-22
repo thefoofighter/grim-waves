@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ba5d21fae5f646c49b47b28decb72b36
+timeCreated: 1485094414
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Pythia
+  fontNames:
+  - Pythia
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
