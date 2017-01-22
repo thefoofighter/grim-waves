@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 using System;
 
+using GrimWaves.Player;
+
 namespace GrimWaves
 {
 	public sealed class GameManager : MonoBehaviour
@@ -34,6 +36,8 @@ namespace GrimWaves
 			if (instance == null)
 			{
 				instance = this;
+
+				Ferry.onSoulsDepleted += GameOver;
 			}
 			else
 			{
@@ -46,6 +50,8 @@ namespace GrimWaves
 			if (instance == this)
 			{
 				instance = null;
+
+				Ferry.onSoulsDepleted -= GameOver;
 			}
 		}
 		#endregion
@@ -106,6 +112,11 @@ namespace GrimWaves
 				SceneManager.UnloadSceneAsync(loadedScene.Value);
 				loadedScene = null;
 			}
+		}
+
+		void GameOver()
+		{
+			EndLevel();
 		}
 		#endregion
 	}
