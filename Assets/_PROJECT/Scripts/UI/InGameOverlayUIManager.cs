@@ -63,7 +63,7 @@ namespace GrimWaves.UI
 		#region HELPER FUNCTIONS
 		void SetSoulsDisplay(int newSouls)
 		{
-			m_SoulsDisplay.text = string.Format("Souls: {0}", newSouls);
+			m_SoulsDisplay.text = string.Format("{0}", newSouls);
 		}
 
 		void SetManaDisplay(int newMana)
