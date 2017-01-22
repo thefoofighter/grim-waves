@@ -193,7 +193,7 @@ namespace GrimWaves.Player
 
 				if (!firedAnim)
 				{
-					RippleAnimate(angle, clockwise);
+					RippleAnimate(angle);
 					firedAnim = true;
 				}
 
@@ -204,19 +204,19 @@ namespace GrimWaves.Player
 			}
 		}
 
-		void RippleAnimate(float angle, bool clockwise)
+		void RippleAnimate(float angle)
 		{
 			FerryAnimationController.AnimationType anim;
 
-			if (angle < 45)
+			if (Math.Abs(angle) < 45f)
 			{
 				anim = FerryAnimationController.AnimationType.HitBack;
 			}
-			else if (angle > 155)
+			else if (Math.Abs(angle) > 155f)
 			{
 				anim = FerryAnimationController.AnimationType.HitFront;
 			}
-			else if (clockwise)
+			else if (angle > 0f)
 			{
 				anim = FerryAnimationController.AnimationType.HitLeft;
 			}
@@ -224,6 +224,8 @@ namespace GrimWaves.Player
 			{
 				anim = FerryAnimationController.AnimationType.HitRight;
 			}
+
+			Debug.LogErrorFormat("{0} - {1}", angle, anim.ToString());
 
 			m_AnimationController.TriggerAnimation(anim);
 		}
