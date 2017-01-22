@@ -9,8 +9,8 @@ namespace GrimWaves.Environments
 		#region PUBLIC VARIABLES
 		public Transform[] m_AvailableSpawnPoints = new Transform[0];
 
-		public float m_ObstacleSpawnChance;
-		public float m_SoulSpawnChance;
+		public float m_ObstacleSpawnChance = 0.1f;
+		public float m_SoulSpawnChance = 0.05f;
 		#endregion
 
 
@@ -47,16 +47,21 @@ namespace GrimWaves.Environments
 
 		void SpawnObstacle(Transform spawnPoint)
 		{
-			// TODO spawn obstacle
-
-			m_OccupiedSpawnPoints.Add(spawnPoint);
+			SpawnObject(LevelDetails.instance.GetRandomObstacle(), spawnPoint);
 		}
 
 		void SpawnSoul(Transform spawnPoint)
 		{
-			// TODO spawn soul
+			SpawnObject(LevelDetails.instance.GetRandomSoul(), spawnPoint);
+		}
 
-			m_OccupiedSpawnPoints.Add(spawnPoint);
+		void SpawnObject<T>(T prefab, Transform spawnPoint) where T : Object
+		{
+			if (prefab != null)
+			{
+				Instantiate(prefab, Vector3.zero, Quaternion.identity, spawnPoint);
+				m_OccupiedSpawnPoints.Add(spawnPoint);
+			}
 		}
 		#endregion
 	}

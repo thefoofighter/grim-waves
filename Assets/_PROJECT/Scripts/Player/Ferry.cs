@@ -164,6 +164,11 @@ namespace GrimWaves.Player
 			--souls;
 		}
 
+		public void PickUpSoul()
+		{
+			++souls;
+		}
+
 		/// <summary>
 		/// Applies a small nudging (impulse) force to the ferry's rigid body in the direction specified.
 		/// </summary>
