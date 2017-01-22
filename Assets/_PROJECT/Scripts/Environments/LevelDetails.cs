@@ -54,7 +54,7 @@ namespace GrimWaves.Environments
 
 
 		#region HELPER FUNCTIONS
-		T GetRandomObject<T>(ref T[] objects) where T : Object
+		T GetRandomObject<T>(ref T[] objects) where T : MonoBehaviour
 		{
 			T result = null;
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+using System.Collections;
 using System.Collections.Generic;
 
 namespace GrimWaves.Environments
@@ -20,8 +21,10 @@ namespace GrimWaves.Environments
 
 
 		#region UNITY EVENTS
-		void Awake()
+		IEnumerator Start()
 		{
+			yield return new WaitWhile(() => LevelDetails.instance == null);
+
 			m_OccupiedSpawnPoints = new List<Transform>(m_AvailableSpawnPoints.Length);
 			SpawnEnvironmentObjects();
 		}
@@ -55,11 +58,11 @@ namespace GrimWaves.Environments
 			SpawnObject(LevelDetails.instance.GetRandomSoul(), spawnPoint);
 		}
 
-		void SpawnObject<T>(T prefab, Transform spawnPoint) where T : Object
+		void SpawnObject<T>(T prefab, Transform spawnPoint) where T : MonoBehaviour
 		{
 			if (prefab != null)
 			{
-				Instantiate(prefab, Vector3.zero, Quaternion.identity, spawnPoint);
+				var go = Instantiate(prefab, spawnPoint, false);
 				m_OccupiedSpawnPoints.Add(spawnPoint);
 			}
 		}
