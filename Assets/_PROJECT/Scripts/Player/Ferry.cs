@@ -2,6 +2,8 @@
 using System;
 using System.Collections;
 
+using GrimWaves.Effects;
+
 namespace GrimWaves.Player
 {
 	/// <summary>
@@ -168,6 +170,7 @@ namespace GrimWaves.Player
 			onObstacleCollision(collisionPosition);
 			--souls;
 			m_AudioController.PlayCollisionSound();
+			EffectsSpawner.instance.SpawnSoulDieEffect(collisionPosition);
 		}
 
 		public void PickUpSoul()

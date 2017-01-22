@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+using GrimWaves.Effects;
 using GrimWaves.Player;
 
 namespace GrimWaves.Environments
@@ -12,6 +13,7 @@ namespace GrimWaves.Environments
 			if (col.gameObject.layer == Layers.FERRY)
 			{
 				Ferry.instance.PickUpSoul();
+				EffectsSpawner.instance.SpawnSoulCollectEffect(transform.position);
 				Destroy(gameObject);
 			}
 		}

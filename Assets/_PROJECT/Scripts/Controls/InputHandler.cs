@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
+using GrimWaves.Effects;
 using GrimWaves.Player;
 
 namespace GrimWaves.Controls
@@ -40,7 +41,7 @@ namespace GrimWaves.Controls
 
 			if (Ferry.instance.HandleRipple(inputPosition))
 			{
-				// TODO Spawn ripple effects, particles, etc.
+				EffectsSpawner.instance.SpawnWaveEffect(inputPosition);
 			}
 
 		}
@@ -51,7 +52,7 @@ namespace GrimWaves.Controls
 
 			if (Ferry.instance.SacrificeSoul(inputPosition))
 			{
-				// TODO Spawn effects etc.
+				EffectsSpawner.instance.SpawnSoulDieEffect(inputPosition);
 			}
 		}
 		#endregion
