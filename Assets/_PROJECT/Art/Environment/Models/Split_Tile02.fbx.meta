@@ -1,23 +1,15 @@
 fileFormatVersion: 2
-guid: 152b80a5500354409b096f443b410dcd
-timeCreated: 1485074751
+guid: 710799e6fda1d420a8dd9bdfe555e112
+timeCreated: 1485086320
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Geo_Tile02
-    100002: //RootNode
-    100004: pasted__group2
-    400000: Geo_Tile02
-    400002: //RootNode
-    400004: pasted__group2
-    2300000: Geo_Tile02
-    2300002: //RootNode
-    3300000: Geo_Tile02
-    3300002: //RootNode
-    4300000: Geo_Tile02
-    4300002: Geo_Tile02 group2
-    9500000: //RootNode
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Geo_TileSplit02 pasted__pasted__pasted__group1 pasted__pasted__
   materials:
     importMaterials: 0
     materialName: 0

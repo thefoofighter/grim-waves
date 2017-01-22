@@ -12,8 +12,11 @@ ModelImporter:
     400002: //RootNode
     400004: pasted__group2
     2300000: Geo_TileTopper03
+    2300002: //RootNode
     3300000: Geo_TileTopper03
+    3300002: //RootNode
     4300000: Geo_TileTopper03
+    4300002: Geo_TileTopper03 group2
     9500000: //RootNode
   materials:
     importMaterials: 0

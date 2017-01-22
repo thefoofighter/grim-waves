@@ -15,7 +15,7 @@ namespace GrimWaves.Environments
 
 
 		#region PRIVATE VARIABLES
-		public List<Transform> m_OccupiedSpawnPoints;
+		List<Transform> m_OccupiedSpawnPoints;
 		#endregion
 
 
