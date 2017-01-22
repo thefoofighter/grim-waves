@@ -5,10 +5,8 @@
 		_Displacement("Displacement Strength", Range(0, 1.0)) = 0.3
 		_Color("Water Color", COLOR) = (1, 1, 1, 0.5)
 		_NormalMap("First Normal Map", 2D) = "black" {}
-		_NormalMap2("Second Normal Map", 2D) = "black" {}
 		_FlowMap("Water Flow Map", 2D) = "black" {}
 		_NoiseMap("Displacement Map", 2D) = "black" {}
-		_CubeMap("Reflection Cubemap", Cube) = "white" { TexGen CubeReflect }
 		_Cycle("Rotation", float) = 1.0
 		_Speed("Speed", float) = 0.05
 		_RippleSpeed("Ripple Speed", float) = 0.05
@@ -187,7 +185,7 @@
 		float f = frac(phase);
 
 		half3 n1 = UnpackNormal(tex2D(_NormalMap, IN.uv_NormalMap + flowDir.xy * frac(phase + 0.5f)));
-		half3 n2 = UnpackNormal(tex2D(_NormalMap2, IN.uv_NormalMap + flowDir.xy * f));
+		half3 n2 = UnpackNormal(tex2D(_NormalMap, IN.uv_NormalMap + flowDir.xy * f));
 
 		if (f > 0.5f)
 			f = 2.0f * (1.0f - f);
@@ -201,7 +199,7 @@
 
 		fixed4 reflcol = texCUBE(_CubeMap, WorldReflectionVector(IN, o.Normal));
 		o.Albedo = _Color.rgb;
-		o.Emission = reflcol.rgb * _ReflectColor.rgb;
+		o.Emission = _ReflectColor.rgb;
 	}
 	ENDCG
 	}
